@@ -1,6 +1,13 @@
 const redis = require("../lib/redis");
 
+function setCors(res) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+}
+
 function sendJson(res, status, data) {
+  setCors(res);
   res.status(status).json(data);
 }
 
@@ -9,12 +16,22 @@ function makeLogId() {
 }
 
 module.exports = async function handler(req, res) {
+  setCors(res);
+
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+
   if (req.method !== "POST") {
     return sendJson(res, 405, { ok: false, error: "Method not allowed" });
   }
 
   try {
-    const body = typeof req.body === "string" ? JSON.parse(req.body || "{}") : (req.body || {});
+    const body =
+      typeof req.body === "string"
+        ? JSON.parse(req.body || "{}")
+        : (req.body || {});
+
     const code = String(body.code || "").trim();
     const rowsAdded = Number(body.rowsAdded || 0);
     const pageUrl = String(body.pageUrl || "").slice(0, 1000);
