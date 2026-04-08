@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FPS 后台管理 V1</title>
+  <link rel="stylesheet" href="/admin/style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <h1>FPS 后台管理 V1</h1>
+      <div class="topbar-right">
+        <input id="adminPassword" type="password" placeholder="输入后台密码" />
+        <button id="savePasswordBtn">保存密码</button>
+      </div>
+    </header>
+
+    <section class="panel">
+      <h2>新增授权码</h2>
+      <div class="form-row">
+        <input id="newCode" type="text" placeholder="授权码，例如 ABC123" />
+        <input id="newMaxUses" type="number" placeholder="总次数，例如 500" />
+        <input id="newRemark" type="text" placeholder="备注，例如 张三团队 / 试用 / 正式版" />
+        <button id="createCodeBtn">新增</button>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-title">
+        <h2>授权码管理</h2>
+        <button id="refreshCodesBtn">刷新</button>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>授权码</th>
+              <th>备注</th>
+              <th>状态</th>
+              <th>总次数</th>
+              <th>已使用</th>
+              <th>剩余</th>
+              <th>创建时间</th>
+              <th>更新时间</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="codesTbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="section-title">
+        <h2>使用记录</h2>
+        <button id="refreshLogsBtn">刷新</button>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>时间</th>
+              <th>授权码</th>
+              <th>提取条数</th>
+              <th>扣减前剩余</th>
+              <th>扣减后剩余</th>
+              <th>页面地址</th>
+              <th>备注快照</th>
+            </tr>
+          </thead>
+          <tbody id="logsTbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <div id="msg" class="msg"></div>
+  </div>
+
+  <script src="/admin/app.js"></script>
+</body>
+</html>
